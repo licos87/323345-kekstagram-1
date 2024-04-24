@@ -12,6 +12,7 @@ function getPalindrom (text) {
   return (primary.replace(' ', '') === second.replace(' ', '')); // проверяет начальный текст и перевернутый
 }
 
+getPalindrom('Лёша на полке клопа нашёл ');
 
 // Функция извлечения цифр
 
@@ -25,6 +26,7 @@ function getNumber (string) {
   }
 }
 
+getNumber('1 кефир, 0.5 батона');
 
 // Функция формирования адресов файлов
 
@@ -43,9 +45,12 @@ function getAdress (string, count, addSymbol) {
   }
 }
 
+getAdress('q', 4, 'we');
 
 // Функция проверки длины строки
 
 function stringLength (string, number) {
   return (string.length <= number);
 }
+
+stringLength('проверяемая строка', 10);
