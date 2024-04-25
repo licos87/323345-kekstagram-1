@@ -34,7 +34,7 @@ const extractNumber = (string) => {
     const outNumber = inNumber ? parseInt(inNumber, 10) : NaN; // parseInt(откудаБерет, форматЧисел(десятичные\шестьнадцатиричные)). Если inNumber=true то parseInt иначе NaN,тернарные операторы учить
     return outNumber;
   } else {
-    return parseInt(string.match(/\d+/g).join(''), 10);
+    return parseInt(string.match(/\d+/g).join(''), 10); // возвращает положительное число.
   }
 };
 
@@ -58,6 +58,33 @@ const getAdress = (string, count, addSymbol) => {
     return result;
   }
 };
+
+/*
+  функция через repeat()
+  const getAdress = (string, count, addSymbol) => {
+    const actualPad = count - string.length;
+
+    return actualPad <=0
+    ? string       // если true возвращает только string, если false, то выполняет следующую строку
+    : addSymbol.slice(0, actualPad % addSymbol.length) + addSymbol.repeat(actualPad / addSymbol.length) + string;
+
+      // делает срез от 1 символа до  остатка от деления ( % <к примеру 5/2 = 2 и остаток 1>) + повторение addSymbol столько раз сколько будет actualPad / addSymbol.length (даже если это дробное число) + string
+      // Метод repeat() конструирует и возвращает новую строку, содержащую указанное количество соединённых вместе копий строки, на которой он был вызван.
+  }
+
+  функция через цикл while
+  const myPadStart = (string, minLength, pad) => {
+    let result = string;
+    while (result.length < minLength) {            // выполняет пока неравенство верно иначе сразу к return
+      const newResultLength = result.length + pad.length;         // общая длина строки
+      const actualPad = newResultLength <= minLength ? pad : pad.slice(0, minLength - newResultLength);  // если общая длина строки меньше ил равна заданой то приравнивает pad иначе делает срез от 0 до разницы длинны
+
+      result = actualPad + result;
+    }
+    return result;
+  }
+
+*/
 
 getAdress('q', 4, 'we');
 
