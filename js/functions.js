@@ -1,6 +1,6 @@
 // Функции для проверки палиндрома
 
-function getPalindrom (text) {
+const getPalindrom = (text) => {
   let primary = text.replaceAll(' ', ''); // убирает пробелы
   primary = primary.toLowerCase(); // приводит весь текст к маленьким буквам
   let second = '';
@@ -10,13 +10,13 @@ function getPalindrom (text) {
   }
 
   return (primary.replace(' ', '') === second.replace(' ', '')); // проверяет начальный текст и перевернутый
-}
+};
 
 getPalindrom('Лёша на полке клопа нашёл ');
 
 // Функция извлечения цифр
 
-function getNumber (string) {
+const getNumber = (string) => {
   if (isNaN(string)) { // проверяем является числом, возвращает true если не число.
     const inNumber = string.match(/\d+/g).join(''); //  равнозначно, что string.match(/[0-9]/g) !учить регулярные выражения. флаг /g показывает что надо перебрать все выражение.  .join('') склеивает все цифры в одно выражение
     const outNumber = inNumber ? parseInt(inNumber, 10) : NaN; // parseInt(откудаБерет, форматЧисел(десятичные\шестьнадцатиричные)). Если inNumber=true то parseInt иначе NaN,тернарные операторы учить
@@ -24,13 +24,13 @@ function getNumber (string) {
   } else {
     return string;
   }
-}
+};
 
 getNumber('1 кефир, 0.5 батона');
 
 // Функция формирования адресов файлов
 
-function getAdress (string, count, addSymbol) {
+const getAdress = (string, count, addSymbol) => {
   const variance = count - string.length; //  смотрим сколько символов добавить
   const sliceText = addSymbol.slice(0, variance); // обрезаем добавочный текст на разницу в колличестве символов
   let result = '';
@@ -43,14 +43,12 @@ function getAdress (string, count, addSymbol) {
     result = sliceText + string;
     return result;
   }
-}
+};
 
 getAdress('q', 4, 'we');
 
 // Функция проверки длины строки
 
-function stringLength (string, number) {
-  return (string.length <= number);
-}
+const stringLength = (string, number) => (string.length <= number);
 
 stringLength('проверяемая строка', 10);
