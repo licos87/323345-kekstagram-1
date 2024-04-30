@@ -75,7 +75,7 @@ const getRandomNumber = (min, max) => {
 };
 
 /**
- *
+ * Функция проверки рандомного числа диапазона min - max, на повторение
  * @param {number} min
  * @param {number} max
  * @returns не повторяющееся число из диапазона min - max
@@ -110,8 +110,8 @@ const getRandomArrayElement = (elements) => {
 
 const newId = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
 const newUrl = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
-const comentsCount = getRandomNumber(1,2);
-const maxNumbers = Math.pow(10, 10);
+const comentsCount = getRandomNumber(1,5);
+const maxNumbers = 100;
 const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
 
 /**
