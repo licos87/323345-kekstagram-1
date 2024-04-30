@@ -159,3 +159,4 @@ const createPhotos = () => ({
 
 const similarPhotos = Array.from({length: PHOTOS_COUNT}, createPhotos);
 
+similarPhotos();
