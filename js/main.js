@@ -86,7 +86,7 @@ const createNoReapeatRandomIndex = (min, max) => {
   return function () {
     let currentValue = getRandomNumber(min, max);
     if (previousValues.length >= (max - min + 1)) {
-      console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
+      // console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
       return null;
     }
     while (previousValues.includes(currentValue)) {
@@ -149,4 +149,3 @@ const createPhotos = () => ({
 
 const similarPhotos = Array.from({length: SIMILAR_PHOTOS_COUNT}, createPhotos);
 
-console.log(similarPhotos);
