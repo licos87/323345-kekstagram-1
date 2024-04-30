@@ -111,8 +111,8 @@ const getRandomArrayElement = (elements) => {
 const newId = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
 const newUrl = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
 const comentsCount = getRandomNumber(1,2);
-const maxNumber = Math.pow(10, 10);
-const commentsId = createNoReapeatRandomIndex(1, maxNumber);
+const maxNumbers = Math.pow(10, 10);
+const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
 
 /**
  * Создает коментарии по шаблону
