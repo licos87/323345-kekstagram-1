@@ -1,6 +1,10 @@
-// Функции для проверки палиндрома
+/**
+ * Функции для проверки текста на палиндромность
+ * @param {string} text получает строку которую будет проверять
+ * @returns true or false (boolean)
+ */
 
-const isPalindrom = (text) => {
+const checkPalindrom = (text) => {
   let tempText = text.replaceAll(' ', ''); // убирает пробелы
   tempText = tempText.toLowerCase(); // приводит весь текст к одному регистру букв !!! можно было записать как tempText = text.replaceAll(' ', '').toLowerCase();
   let reverseText = '';
@@ -13,7 +17,7 @@ const isPalindrom = (text) => {
 };
 
 /*
-const isPalindrom = (text) => {
+const checkPalindrom = (text) => {
 	const tempText = text
 		.replaceAll(' ', '')
 		.toLowerCase();
@@ -23,9 +27,14 @@ const isPalindrom = (text) => {
 	Сокращеное написание.  Возвращает  и сравнивает tempText = метод переводит tempText в массив ( tempText.split('') ) метод переворачивает массив ( .reverse() ) метод обьеденяет массив в строку ( .join() )
 */
 
-isPalindrom('Лёша на полке клопа нашёл ');
+checkPalindrom('Лёша на полке клопа нашёл ');
 
-// Функция извлечения цифр
+
+/**
+ * Функция извлечения цифр
+ * @param {string} string получает строку из которой будет доставать  все цифры
+ * @returns number выводит результат формата '1 кефир, 0.5 батона'  => 105
+ */
 
 const extractNumber = (string) => {
   if (isNaN(string)) { // проверяем является числом, возвращает true если не число.
@@ -33,16 +42,22 @@ const extractNumber = (string) => {
     const inNumber = string.match(/\d+/g).join(''); //  выбирает все цифры, равнозначно, что string.match(/[0-9]/g) !учить регулярные выражения. флаг /g показывает что надо перебрать все выражение.  .join('') склеивает все цифры в одно выражение
     const outNumber = inNumber ? parseInt(inNumber, 10) : NaN; // parseInt(откудаБерет, форматЧисел(десятичные\шестьнадцатиричные)). Если inNumber=true то parseInt иначе NaN,тернарные операторы учить
     return outNumber;
-  } else {
-    return parseInt(string.match(/\d+/g).join(''), 10); // возвращает положительное число.
   }
+  return parseInt(string.match(/\d+/g).join(''), 10); // возвращает положительное число.
 };
 
 // проверка на число if (typeof string === 'number') {return string}
 
 extractNumber('1 кефир, 0.5 батона');
 
-// Функция формирования адресов файлов
+
+/**
+ * Функция формирования адресов файлов
+ * @param {string} string основная строка
+ * @param {number} count общее колличество знаков которое должно быть
+ * @param {string} addSymbol символы которые будут добавляться
+ * @returns string Получаем строку типа 'q', 4, 'we'  => 'wweq'
+ */
 
 const getAdress = (string, count, addSymbol) => {
   const variance = count - string.length; //  смотрим сколько символов добавить
@@ -53,10 +68,9 @@ const getAdress = (string, count, addSymbol) => {
       result += addSymbol.slice(0, variance - addSymbol.length); // добавляем символы сколько может поместиться в разницу
     }
     return result + addSymbol + string;
-  } else {
-    result = sliceText + string;
-    return result;
   }
+  result = sliceText + string;
+  return result;
 };
 
 /*
@@ -88,8 +102,13 @@ const getAdress = (string, count, addSymbol) => {
 
 getAdress('q', 4, 'we');
 
-// Функция проверки длины строки
+/**
+ * Функция проверки длины строки
+ * @param {string} string Строка для проверки
+ * @param {number} length Длина строки
+ * @returns true or false
+ */
 
-const isStringLength = (string, length) => string.length <= length; // т.к проверка проходит в 1 строку  true||false, стрелочная функция сокращается и убираются все скобки и if
+const checkStringLength = (string, length) => string.length <= length; // т.к проверка проходит в 1 строку  true||false, стрелочная функция сокращается и убираются все скобки и if
 
-isStringLength('проверяемая строка', 10);
+checkStringLength('проверяемая строка', 10);
