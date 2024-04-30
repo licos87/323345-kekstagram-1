@@ -1,13 +1,9 @@
-const MIN_PHOTOS = 1;
-const MAX_PHOTOS = 25;
+const PHOTOS_COUNT = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
-const MIN_AVATAR = 1;
-const MAX_AVATAR = 6;
+const AVATAR_COUNT = 6;
 const PHOTOS_PATH = 'photos/';
 const IMG_PATH = 'img/avatar-';
-
-const SIMILAR_PHOTOS_COUNT = 25;
 
 const DESCRIPTION = [
   'Величественный горный пейзаж с кристально чистым озером.',
@@ -108,8 +104,8 @@ const getRandomArrayElement = (elements) => {
   return elements[newElement()];
 };
 
-const newId = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
-const newUrl = createNoReapeatRandomIndex(MIN_PHOTOS, MAX_PHOTOS);
+const newId = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
+const newUrl = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
 const comentsCount = getRandomNumber(1,5);
 const maxNumbers = 100;
 const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
@@ -124,7 +120,7 @@ const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
  */
 const createComments = () => ({
   id: Math.floor(commentsId()),
-  avatar: IMG_PATH + getRandomNumber(MIN_AVATAR, MAX_AVATAR),
+  avatar: IMG_PATH + getRandomNumber(1, AVATAR_COUNT),
   message: (comentsCount === 1) ? getRandomArrayElement(MESSAGE) : getRandomArrayElement(MESSAGE) + getRandomArrayElement(MESSAGE),
   name: NAME[getRandomNumber(1, NAME.length - 1)]
 });
@@ -147,5 +143,5 @@ const createPhotos = () => ({
 });
 
 
-const similarPhotos = Array.from({length: SIMILAR_PHOTOS_COUNT}, createPhotos);
+const similarPhotos = Array.from({length: PHOTOS_COUNT}, createPhotos);
 
