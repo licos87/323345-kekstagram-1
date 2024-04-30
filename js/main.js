@@ -5,7 +5,7 @@ const AVATAR_COUNT = 6;
 const PHOTOS_PATH = 'photos/';
 const IMG_PATH = 'img/avatar-';
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Величественный горный пейзаж с кристально чистым озером.',
   'Роскошный закат, окрашивающий небо яркими оттенками.',
   'Мощный водопад, излучающий силу и энергию.',
@@ -33,7 +33,7 @@ const DESCRIPTION = [
   'Мирная деревня, окруженная прекрасной природой, воплощение гармонии.',
 ];
 
-const MESSAGE = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -42,7 +42,7 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const NAME = [
+const NAMES = [
   'Петя',
   'Оля',
   'Коля',
@@ -107,8 +107,22 @@ const getRandomArrayElement = (elements) => {
 const newId = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
 const newUrl = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
 const comentsCount = getRandomNumber(1,5);
-const maxNumbers = 100;
-const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
+
+/**
+ * Счетчик id коментариев
+ * @returns {number} число каждый раз +1
+ */
+const generatecommentsId = () => {
+  let lastIdcomments = 1;
+  return () => lastIdcomments++;
+};
+const comentsId = generatecommentsId();
+
+/**
+ * Анонимная функция для генерации коментариев из массива MESSAGES
+ * @returns {string} 1 или 2 коментария
+ */
+const createMessage = () => Array.from({ length: getRandomNumber(1, 2) }, () => getRandomArrayElement(MESSAGES)).join(' ');
 
 /**
  * Создает коментарии по шаблону
@@ -119,10 +133,10 @@ const commentsId = createNoReapeatRandomIndex(1, maxNumbers);
  * @returns {Obj} шаблонизатор для коментариев
  */
 const createComments = () => ({
-  id: Math.floor(commentsId()),
-  avatar: IMG_PATH + getRandomNumber(1, AVATAR_COUNT),
-  message: (comentsCount === 1) ? getRandomArrayElement(MESSAGE) : getRandomArrayElement(MESSAGE) + getRandomArrayElement(MESSAGE),
-  name: NAME[getRandomNumber(1, NAME.length - 1)]
+  id: comentsId(),
+  avatar: `${IMG_PATH + getRandomNumber(1, AVATAR_COUNT) }.svg`,
+  message: createMessage(),
+  name: NAMES[getRandomNumber(1, NAMES.length - 1)]
 });
 
 /**
@@ -137,7 +151,7 @@ const createComments = () => ({
 const createPhotos = () => ({
   id: +newId(),
   url: `${PHOTOS_PATH + newUrl()}.jpg`,
-  description: getRandomArrayElement(DESCRIPTION),
+  description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
   comments: Array.from({length: comentsCount}, createComments)
 });
