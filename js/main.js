@@ -149,7 +149,7 @@ const createComments = () => ({
  * @returns {Obj} Пост фотографии
  */
 const createPhotos = () => ({
-  id: +newId(),
+  id: newId(),
   url: `${PHOTOS_PATH + newUrl()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
