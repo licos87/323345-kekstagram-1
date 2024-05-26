@@ -1,7 +1,4 @@
-import {getRandomNumber} from './utils.js';
-import {getRandomArrayElement} from './utils.js';
-import {createNoReapeatRandomIndex} from './utils.js';
-import {generatecommentsId} from './utils.js';
+import {getRandomNumber, getRandomArrayElement, createNoReapeatRandomIndex, generatecommentsId} from './utils.js';
 
 const PHOTOS_COUNT = 25;
 const MIN_LIKES = 15;
@@ -109,4 +106,4 @@ const createPhotos = () => ({
 
 const similarPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotos);
 
-similarPhotos();
+export {similarPhotos};

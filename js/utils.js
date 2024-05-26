@@ -5,14 +5,13 @@
  * @returns random number
  */
 
-const getRandomNumber = (min, max) => {
+export const getRandomNumber = (min, max) => {
   const minNumber = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const maxNumber = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (maxNumber - minNumber + 1) + minNumber;
   return Math.floor(result);
 };
 
-export {getRandomNumber};
 
 /**
  * Функция проверки рандомного числа диапазона min - max, на повторение
@@ -20,7 +19,7 @@ export {getRandomNumber};
  * @param {number} max
  * @returns не повторяющееся число из диапазона min - max
  */
-const createNoReapeatRandomIndex = (min, max) => {
+export const createNoReapeatRandomIndex = (min, max) => {
   const previousValues = [];
 
   return function () {
@@ -37,29 +36,23 @@ const createNoReapeatRandomIndex = (min, max) => {
   };
 };
 
-export {createNoReapeatRandomIndex};
 
 /**
  * Выбирает случайный элемент массива
  * @param {Obj} elements получает массив
  * @returns  случайный элемент массива
  */
-const getRandomArrayElement = (elements) => {
+export const getRandomArrayElement = (elements) => {
   const newElement = createNoReapeatRandomIndex(0, elements.length - 1);
   return elements[newElement()];
 };
-
-export {getRandomArrayElement};
 
 
 /**
  * Счетчик id коментариев
  * @returns {number} число каждый раз +1
  */
-const generatecommentsId = () => {
+export const generatecommentsId = () => {
   let lastIdcomments = 1;
   return () => lastIdcomments++;
 };
-// const comentsId = generatecommentsId();
-
-export {generatecommentsId};
