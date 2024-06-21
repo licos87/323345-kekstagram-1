@@ -1,5 +1,3 @@
-import { similarPhotos } from './create-photos.js';
-
 const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
