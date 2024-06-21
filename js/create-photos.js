@@ -82,7 +82,7 @@ const createComments = () => ({
 
 const newId = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
 const newUrl = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
-const comentsCount = getRandomNumber(1,5);
+const comentsCount = getRandomNumber(1, 5);
 
 
 // Создаем пост с фотографиями и коментариями
@@ -98,7 +98,7 @@ const comentsCount = getRandomNumber(1,5);
 */
 const createPhotos = () => ({
   id: newId(),
-  url: `photos/ +${newUrl()}.jpg`,
+  url: `../photos/${ newUrl() }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
   comments: Array.from({length: comentsCount}, createComments)
@@ -106,4 +106,4 @@ const createPhotos = () => ({
 
 const similarPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotos);
 
-export {similarPhotos};
+export { similarPhotos };
