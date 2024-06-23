@@ -14,15 +14,15 @@ const createImg = (({url, description, likes, comments}) => {
   return imgElement;
 });
 
-const renderImg = (images) => {
-  const imgFragment = document.createDocumentFragment();
+const renderThumbnail = (images) => {
+  const thumbnailFragment = document.createDocumentFragment();
 
   images.forEach((image) => {
     const thumbnail = createImg(image);
-    imgFragment.append(thumbnail);
+    thumbnailFragment.append(thumbnail);
   });
 
-  picturesBlock.append(imgFragment);
+  picturesBlock.append(thumbnailFragment);
 };
 
-export { renderImg };
+export { renderThumbnail };
