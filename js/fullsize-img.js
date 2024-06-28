@@ -38,8 +38,6 @@ function openUserModal (evt) {
     document.querySelector('.comments-count').textContent = library[targetIndex].comments.length;
     document.querySelector('.social__caption').textContent = library[targetIndex].alt;
     //Скрываем лишние элементы
-    document.querySelector('.social__comment-count').classList.add('hidden');
-    document.querySelector('.comments-loader').classList.add('hidden');
     document.querySelector('body').classList.add('modal-open');
 
     document.addEventListener('keydown', onDocumentKeydown);

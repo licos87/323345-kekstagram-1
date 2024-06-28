@@ -101,7 +101,7 @@ const createPhotos = () => ({
   url: `../photos/${ newUrl() }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
-  comments: Array.from({length: getRandomNumber(1, 5)}, createComments)
+  comments: Array.from({length: getRandomNumber(1, 15)}, createComments)
 });
 
 const similarPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotos);

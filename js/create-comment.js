@@ -15,6 +15,8 @@ const removeChildrens = () => {
 
 const picturesBlock = document.querySelector('.pictures');
 
+const MoreCommentsBtn = document.querySelector('.comments-loader');
+
 // Поведение при нажатии Esc
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -57,13 +59,41 @@ function openUserModal (evt) {
         commentFragment.append(commentary);
       });
       commentsBlock.append(commentFragment);
-
-
     };
     renderComments(library[targetIndex].comments);
+
+    const newCommentList = Array.from(commentsBlock.querySelectorAll('li'));
+
+    const step = 5;
+    let item = 0;
+    let commitsPartOne = newCommentList.slice(item, item + step);
+
+    const toggleCommnts = () => {
+      newCommentList.forEach((element) => {
+        element.style.display = 'none';
+      });
+      commitsPartOne.forEach((element) => {
+        element.style.display = 'flex';
+      });
+    };
+
+    toggleCommnts();
+
+    MoreCommentsBtn.addEventListener('click', () => {
+      item += step;
+      commitsPartOne = newCommentList.slice(item, item + step);
+      commitsPartOne.forEach((element) => {
+        element.style.display = 'none';
+      });
+      toggleCommnts();
+
+    });
+
+
   }
   document.addEventListener('keydown', onDocumentKeydown);
 }
+
 
 function closeUserModal () {
 
