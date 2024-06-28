@@ -17,6 +17,8 @@ const picturesBlock = document.querySelector('.pictures');
 
 const MoreCommentsBtn = document.querySelector('.comments-loader');
 
+const socialCommentCount = document.querySelector('.social__comment-count');
+
 // Поведение при нажатии Esc
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -64,9 +66,10 @@ function openUserModal (evt) {
 
     const newCommentList = Array.from(commentsBlock.querySelectorAll('li'));
 
-    const step = 5;
+    const STEP = 5;
     let item = 0;
-    let commitsPartOne = newCommentList.slice(item, item + step);
+    let commitsPartOne = newCommentList.slice(item, item + STEP);
+    socialCommentCount.innerHTML = `${commitsPartOne.length} из <span class="comments-count">${library[targetIndex].comments.length}</span> комментариев</div>`;
 
     const toggleCommnts = () => {
       newCommentList.forEach((element) => {
@@ -80,8 +83,9 @@ function openUserModal (evt) {
     toggleCommnts();
 
     MoreCommentsBtn.addEventListener('click', () => {
-      item += step;
-      commitsPartOne = newCommentList.slice(item, item + step);
+      item += STEP;
+      commitsPartOne = newCommentList.slice(item, item + STEP);
+      socialCommentCount.innerHTML = `${commitsPartOne.length} из <span class="comments-count">${library[targetIndex].comments.length}</span> комментариев</div>`;
       commitsPartOne.forEach((element) => {
         element.style.display = 'none';
       });
