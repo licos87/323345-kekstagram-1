@@ -50,6 +50,7 @@ function openUserModal (evt) {
  */
 function closeUserModal () {
   bigPictureBlock.classList.add('hidden');
+  document.removeEventListener('keydown', onDocumentKeydown);
   document.querySelector('body').classList.remove('modal-open');
   buttonClose.removeEventListener('click', closeUserModal);
 }
