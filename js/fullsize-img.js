@@ -1,6 +1,6 @@
 //Создание полноразмерного изображения из миниатюры.
 
-import { library } from './library-thumbnail.js';
+import { imageDatabase } from './imageDatabase.js';
 import { isEscapeKey } from './utils.js';
 
 const picturesBlock = document.querySelector('.pictures');
@@ -19,6 +19,11 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const likesCount = document.querySelector('.likes-count');
+const commentsCount = document.querySelector('.comments-count');
+const socialCaption = document.querySelector('.social__caption');
+const body = document.querySelector('body');
+
 /**
  * Поведение при открытии модального окна (Развернутой фотографии)
  * @param {evt.target} evt
@@ -31,14 +36,14 @@ function openUserModal (evt) {
     // Ищем соответствие в библиотеке данных о фотографиях
     const targetId = evt.target.dataset.id;
 
-    const targetIndex = library.findIndex((element) => String(element.id) === targetId);
+    const targetIndex = imageDatabase.findIndex((element) => String(element.id) === targetId);
 
     // Присваиваем данные из библиотеки
-    document.querySelector('.likes-count').textContent = library[targetIndex].likes;
-    document.querySelector('.comments-count').textContent = library[targetIndex].comments.length;
-    document.querySelector('.social__caption').textContent = library[targetIndex].alt;
-    //Скрываем лишние элементы
-    document.querySelector('body').classList.add('modal-open');
+    likesCount.textContent = imageDatabase[targetIndex].likes;
+    commentsCount.textContent = imageDatabase[targetIndex].comments.length;
+    socialCaption.textContent = imageDatabase[targetIndex].alt;
+
+    body.classList.add('modal-open');
 
     document.addEventListener('keydown', onDocumentKeydown);
     buttonClose.addEventListener('click', closeUserModal);

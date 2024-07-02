@@ -1,29 +1,31 @@
 // Создание комменитариев
-import { library } from './library-thumbnail.js';
+import { imageDatabase } from './imageDatabase.js';
 import { isEscapeKey } from './utils.js';
+
+const STEP = 5;
 
 const bigPictureBlock = document.querySelector('.big-picture');
 const buttonClose = bigPictureBlock.querySelector('.big-picture__cancel');
 
 const commentsBlock = document.querySelector('.social__comments');
 const commentList = commentsBlock.querySelectorAll('li');
-const removeChildrens = () => {
+const picturesBlock = document.querySelector('.pictures');
+const moreCommentsBtn = document.querySelector('.comments-loader');
+
+const socialCommentCount = document.querySelector('.comments-step');
+const commentsCount = document.querySelector('.comments-count');
+
+const onCommentsBlockRemoveChildrens = () => {
   while (commentsBlock.firstChild) {
     commentsBlock.removeChild(commentsBlock.firstChild);
   }
 };
 
-const picturesBlock = document.querySelector('.pictures');
-
-const MoreCommentsBtn = document.querySelector('.comments-loader');
-
-const socialCommentCount = document.querySelector('.social__comment-count');
-
 // Поведение при нажатии Esc
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    removeChildrens();
+    onCommentsBlockRemoveChildrens();
   }
 };
 
@@ -36,73 +38,90 @@ const commentItem = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
 
-function openUserModal (evt) {
+const renderComments = (libraryCommentElements) => {
+  const commentFragment = document.createDocumentFragment();
+
+  libraryCommentElements.forEach((libraryCommentElement) => {
+    const createComentItem = ((data) => {
+      const commentElement = commentItem.cloneNode(true);
+
+      commentElement.querySelector('.social__picture').src = data.avatar;
+      commentElement.querySelector('.social__picture').alt = data.name;
+      commentElement.querySelector('.social__text').textContent = data.message;
+
+      return commentElement;
+    });
+
+    const commentary = createComentItem(libraryCommentElement);
+    commentFragment.append(commentary);
+  });
+  commentsBlock.append(commentFragment);
+};
+
+function onModalOpen (evt) {
   if (evt.target.matches('.picture__img')) {
 
     // Ищем соответствие в библиотеке данных о фотографиях
     const targetId = evt.target.dataset.id;
-    const targetIndex = library.findIndex((element) => String(element.id) === targetId);
+    const targetIndex = imageDatabase.findIndex((element) => String(element.id) === targetId);
 
-    const renderComments = (libraryCommentElements) => {
-      const commentFragment = document.createDocumentFragment();
-
-      libraryCommentElements.forEach((libraryCommentElement) => {
-        const createComentItem = ((data) => {
-          const commentElement = commentItem.cloneNode(true);
-
-          commentElement.querySelector('.social__picture').src = data.avatar;
-          commentElement.querySelector('.social__picture').alt = data.name;
-          commentElement.querySelector('.social__text').textContent = data.message;
-
-          return commentElement;
-        });
-
-        const commentary = createComentItem(libraryCommentElement);
-        commentFragment.append(commentary);
-      });
-      commentsBlock.append(commentFragment);
-    };
-    renderComments(library[targetIndex].comments);
+    renderComments(imageDatabase[targetIndex].comments);
 
     const newCommentList = Array.from(commentsBlock.querySelectorAll('li'));
 
-    const STEP = 5;
     let item = 0;
-    let commitsPartOne = newCommentList.slice(item, item + STEP);
-    socialCommentCount.innerHTML = `${commitsPartOne.length} из <span class="comments-count">${library[targetIndex].comments.length}</span> комментариев</div>`;
+    let commentsPartOne = newCommentList.slice(item, item + STEP);
+    let commentShowSum = commentsPartOne.length;
+
+    const dataBaseCommentsLength = imageDatabase[targetIndex].comments.length;
+
+    moreCommentsBtn.classList.remove('visually-hidden');
+    if (commentShowSum >= dataBaseCommentsLength) {
+      moreCommentsBtn.classList.add('visually-hidden');
+    }
+
+    socialCommentCount.textContent = commentShowSum;
+    commentsCount.textContent = dataBaseCommentsLength;
 
     const toggleCommnts = () => {
       newCommentList.forEach((element) => {
         element.style.display = 'none';
       });
-      commitsPartOne.forEach((element) => {
+      commentsPartOne.forEach((element) => {
         element.style.display = 'flex';
       });
     };
 
     toggleCommnts();
 
-    MoreCommentsBtn.addEventListener('click', () => {
+    moreCommentsBtn.addEventListener('click', () => {
+
       item += STEP;
-      commitsPartOne = newCommentList.slice(item, item + STEP);
-      socialCommentCount.innerHTML = `${commitsPartOne.length} из <span class="comments-count">${library[targetIndex].comments.length}</span> комментариев</div>`;
-      commitsPartOne.forEach((element) => {
+      commentsPartOne = newCommentList.slice(item, item + STEP);
+      commentShowSum += commentsPartOne.length;
+
+      moreCommentsBtn.classList.remove('visually-hidden');
+      if (commentShowSum >= dataBaseCommentsLength) {
+        moreCommentsBtn.classList.add('visually-hidden');
+      }
+
+      socialCommentCount.textContent = commentShowSum;
+      commentsCount.textContent = dataBaseCommentsLength;
+
+      commentsPartOne.forEach((element) => {
         element.style.display = 'none';
       });
       toggleCommnts();
-
     });
-
-
   }
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
 
-function closeUserModal () {
+function onModalClose () {
 
-  removeChildrens();
+  onCommentsBlockRemoveChildrens();
 }
 
-picturesBlock.addEventListener('click', openUserModal);
-buttonClose.addEventListener('click', closeUserModal);
+picturesBlock.addEventListener('click', onModalOpen);
+buttonClose.addEventListener('click', onModalClose);

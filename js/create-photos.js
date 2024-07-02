@@ -105,5 +105,6 @@ const createPhotos = () => ({
 });
 
 const similarPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotos);
-const similarImg = similarPhotos();
-export { similarImg };
+const similarImages = similarPhotos();
+
+export { similarImages };

@@ -1,15 +1,15 @@
 // Создание библиотеки данных о фотографиях
 
-import { similarImg } from './create-photos.js';
+import { similarImages } from './create-photos.js';
 const libraryThumbnail = [];
 
 /**
  * Функция создания данных библиотеки изображений. Данные берет из симуляции данных об изображениях (similarImg), на входе деструтуризирует их.
- * @param {id} similarImg.id
- * @param {url} similarImg.url
- * @param {description} similarImg.description
- * @param {likes} similarImg.likes
- * @param {comments} similarImg.comments
+ * @param {id} similarImages.id
+ * @param {url} similarImages.url
+ * @param {description} similarImages.description
+ * @param {likes} similarImages.likes
+ * @param {comments} similarImages.comments
  * @returns { [] } Возвращает массив данных
  */
 const dataImg = (({id, url, description, likes, comments}) => {
@@ -29,7 +29,7 @@ const dataImg = (({id, url, description, likes, comments}) => {
 
 /**
  *
- * @param { similarImg } Получает на входе симулированные изображения
+ * @param { similarImages } Получает на входе симулированные изображения
  * @returns  { [] } Возвращает массив данных на основе similarImg
  */
 const renderLibrary = (images) => {
@@ -41,6 +41,6 @@ const renderLibrary = (images) => {
   return libraryThumbnail;
 };
 
-const library = renderLibrary(similarImg);
+const imageDatabase = renderLibrary(similarImages);
 
-export { library };
+export { imageDatabase };
