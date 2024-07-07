@@ -1,3 +1,5 @@
+// Создание группы данных об изображениях
+
 import {getRandomNumber, getRandomArrayElement, createNoReapeatRandomIndex, generatecommentsId} from './utils.js';
 
 const PHOTOS_COUNT = 25;
@@ -75,9 +77,9 @@ const createMessage = () => Array.from({ length: getRandomNumber(1, 2) }, () => 
 */
 const createComments = () => ({
   id: generatecommentsId(),
-  avatar: `img/avatar- + ${getRandomNumber(1, AVATAR_COUNT)}.svg`,
+  avatar: `../img/avatar-${getRandomNumber(1, AVATAR_COUNT)}.svg`,
   message: createMessage(),
-  name: NAMES[getRandomNumber(1, NAMES.length - 1)]
+  name: NAMES[getRandomNumber(0, NAMES.length - 1)]
 });
 
 const newId = createNoReapeatRandomIndex(1, PHOTOS_COUNT);
@@ -99,9 +101,10 @@ const createPhotos = () => ({
   url: `../photos/${ newUrl() }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
-  comments: Array.from({length: getRandomNumber(1, 5)}, createComments)
+  comments: Array.from({length: getRandomNumber(1, 15)}, createComments)
 });
 
 const similarPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotos);
+const similarImages = similarPhotos();
 
-export { similarPhotos };
+export { similarImages };

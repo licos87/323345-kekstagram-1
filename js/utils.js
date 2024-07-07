@@ -1,3 +1,5 @@
+// Общие функции
+
 /**
  * Функция создания рандомного числа в диапазоне чисел от minNumber до maxNumber
  * @param {number} minNumber
@@ -57,4 +59,6 @@ const generatecommentsId = () => {
   return () => lastIdcomments++;
 };
 
-export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey};
