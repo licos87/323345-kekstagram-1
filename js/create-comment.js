@@ -117,7 +117,6 @@ function onModalOpen (evt) {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
-
 function onModalClose () {
 
   onCommentsBlockRemoveChildrens();
