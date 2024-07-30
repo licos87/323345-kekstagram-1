@@ -45,6 +45,7 @@ function openUserModal (evt) {
 
     body.classList.add('modal-open');
 
+    // Добавляет слушатели на закрытие окна
     document.addEventListener('keydown', onDocumentKeydown);
     buttonClose.addEventListener('click', closeUserModal);
   }
@@ -55,8 +56,8 @@ function openUserModal (evt) {
  */
 function closeUserModal () {
   bigPictureBlock.classList.add('hidden');
-  document.removeEventListener('keydown', onDocumentKeydown);
   document.querySelector('body').classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
   buttonClose.removeEventListener('click', closeUserModal);
 }
 
