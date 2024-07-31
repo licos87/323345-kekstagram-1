@@ -1,7 +1,7 @@
 const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/',
+  SEND_DATA: '/1',
 };
 const Method = {
   GET: 'GET',

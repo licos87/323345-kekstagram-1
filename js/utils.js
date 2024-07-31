@@ -1,5 +1,4 @@
 // Общие функции
-const ALERT_SHOW_TIME = 5000;
 /**
  * Функция создания рандомного числа в диапазоне чисел от minNumber до maxNumber
  * @param {number} minNumber
@@ -61,25 +60,4 @@ const generatecommentsId = () => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const showAlert = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '0';
-  alertContainer.style.top = '10px';
-  alertContainer.style.right = '0';
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '25px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = '#f75353';
-
-  alertContainer.textContent = message;
-
-  document.body.append(alertContainer);
-
-  setTimeout(() => {
-    alertContainer.remove();
-  }, ALERT_SHOW_TIME);
-};
-
-export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey, showAlert};
+export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey};

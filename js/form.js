@@ -1,7 +1,7 @@
 import { resetScale } from './upload-files.js';
 import { resetEffects } from './effects.js';
 import { sendData } from './api.js';
-import { showAlert } from './utils.js';
+import { renderErrorMessage } from './error.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -33,7 +33,7 @@ const pristine = new Pristine(form, {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocKeydown);
 };
 
 
@@ -47,7 +47,7 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocKeydown);
 };
 
 
@@ -62,7 +62,7 @@ const isTextFieldFocused = () =>
  * Поведение при нажатии Escape.
  * @param {*} evt
  */
-function onDocumentKeydown(evt) {
+function onDocKeydown(evt) {
   if (!isTextFieldFocused() && evt.key === 'Escape' && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
@@ -120,11 +120,17 @@ const setUserFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(onSuccess)
         .catch(
-          (err) => {
-            showAlert(err.message);
+          () => {
+            document.removeEventListener('keydown', onDocKeydown);
+            renderErrorMessage();
           }
         )
-        .finally(unblockSubmitButton);
+        .finally(() => {
+          unblockSubmitButton();
+          setTimeout(() => {
+            document.addEventListener('keydown', onDocKeydown);
+          }, 2000);
+        });
     }
   });
 };

@@ -61,4 +61,5 @@ function closeUserModal () {
   buttonClose.removeEventListener('click', closeUserModal);
 }
 
+export { onDocumentKeydown };
 
