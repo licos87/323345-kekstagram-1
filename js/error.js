@@ -30,4 +30,34 @@ const renderErrorMessage = () => {
   });
 };
 
-export { renderErrorMessage };
+const successTemplate = document.querySelector('#success')
+  .content
+  .querySelector('.success');
+
+
+const successElement = successTemplate.cloneNode(true);
+
+
+const renderSuccessMessage = () => {
+  const successFragment = document.createDocumentFragment();
+  successFragment.append(successElement);
+
+  messageBlock.append(successFragment);
+
+  const successModal = document.querySelector('.success');
+  const buttonClose = document.querySelector('.success__button');
+
+  document.addEventListener('keydown', () => {
+    successModal.remove();
+  });
+  buttonClose.addEventListener('click', () => {
+    successModal.remove();
+  });
+
+  successModal.addEventListener('click', () => {
+    successModal.remove();
+  });
+};
+
+
+export { renderSuccessMessage, renderErrorMessage };

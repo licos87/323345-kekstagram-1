@@ -1,7 +1,7 @@
 import { resetScale } from './upload-files.js';
 import { resetEffects } from './effects.js';
 import { sendData } from './api.js';
-import { renderErrorMessage } from './error.js';
+import { renderErrorMessage, renderSuccessMessage } from './error.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -118,7 +118,10 @@ const setUserFormSubmit = (onSuccess) => {
     if (isValid) {
       blockSubmitButton();
       sendData(new FormData(evt.target))
-        .then(onSuccess)
+        .then(() => {
+          onSuccess();
+          renderSuccessMessage();
+        })
         .catch(
           () => {
             document.removeEventListener('keydown', onDocKeydown);
