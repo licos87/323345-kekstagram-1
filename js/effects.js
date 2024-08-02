@@ -52,27 +52,27 @@ const EFFECTS = [
 ];
 
 const BASE_EFFECT = EFFECTS[0];
-let chosenEfect = BASE_EFFECT;
+let chosenEffect = BASE_EFFECT;
 
 const imageElement = document.querySelector('.img-upload__preview img');
 const effectsElement = document.querySelector('.effects');
 const sliderElement = document.querySelector('.effect-level__slider');
-const sliderConteinerElement = document.querySelector('.img-upload__effect-level');
+const sliderContainerElement = document.querySelector('.img-upload__effect-level');
 const effectLevelElement = document.querySelector('.effect-level__value');
 
-const isDefault = () => chosenEfect === BASE_EFFECT;
+const isDefault = () => chosenEffect === BASE_EFFECT;
 
-const toSliderShow = () => sliderConteinerElement.classList.remove('hidden');
-const toSliderHide = () => sliderConteinerElement.classList.add('hidden');
+const toSliderShow = () => sliderContainerElement.classList.remove('hidden');
+const toSliderHide = () => sliderContainerElement.classList.add('hidden');
 
 const updateSlider = () => {
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: chosenEfect.min,
-      max: chosenEfect.max,
+      min: chosenEffect.min,
+      max: chosenEffect.max,
     },
-    step: chosenEfect.step,
-    start: chosenEfect.max,
+    step: chosenEffect.step,
+    start: chosenEffect.max,
   });
   if (isDefault()) {
     toSliderHide();
@@ -85,8 +85,8 @@ const onEffectsChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  chosenEfect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  imageElement.className = `effects__preview--${chosenEfect.name}`;
+  chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  imageElement.className = `effects__preview--${chosenEffect.name}`;
   updateSlider();
 };
 
@@ -94,12 +94,12 @@ const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   imageElement.style.filter = isDefault()
     ? BASE_EFFECT.style
-    : `${chosenEfect.style}(${sliderValue}${chosenEfect.unit})`;
+    : `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
   effectLevelElement.value = sliderValue;
 };
 
 const resetEffects = () => {
-  chosenEfect = BASE_EFFECT;
+  chosenEffect = BASE_EFFECT;
   updateSlider();
 };
 

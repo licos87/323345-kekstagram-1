@@ -58,6 +58,7 @@ const hideModal = () => {
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField || document.activeElement === commentField;
 
+
 /**
  * Поведение при нажатии Escape.
  * @param {*} evt

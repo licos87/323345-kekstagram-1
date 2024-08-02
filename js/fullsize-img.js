@@ -8,14 +8,14 @@ const bigPictureBlock = document.querySelector('.big-picture');
 const buttonClose = bigPictureBlock.querySelector('.big-picture__cancel');
 
 // Установка обработчиков события на открытие / закрытие модального окна
-picturesBlock.addEventListener('click', openUserModal);
+picturesBlock.addEventListener('click', onUserModalOpen);
 
 const pictureImgConteniner = bigPictureBlock.querySelector('.big-picture__img');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeUserModal();
+    onCloseUserModal();
   }
 };
 
@@ -28,7 +28,7 @@ const body = document.querySelector('body');
  * Поведение при открытии модального окна (Развернутой фотографии)
  * @param {evt.target} evt
  */
-function openUserModal (evt) {
+function onUserModalOpen (evt) {
   if (evt.target.matches('.picture__img')) {
     bigPictureBlock.classList.remove('hidden');
     pictureImgConteniner.querySelector('img').src = evt.target.src;
@@ -47,18 +47,18 @@ function openUserModal (evt) {
 
     // Добавляет слушатели на закрытие окна
     document.addEventListener('keydown', onDocumentKeydown);
-    buttonClose.addEventListener('click', closeUserModal);
+    buttonClose.addEventListener('click', onCloseUserModal);
   }
 }
 
 /**
  * Поведение при закрытии мадального окна.
  */
-function closeUserModal () {
+function onCloseUserModal () {
   bigPictureBlock.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  buttonClose.removeEventListener('click', closeUserModal);
+  buttonClose.removeEventListener('click', onCloseUserModal);
 }
 
 export { onDocumentKeydown };
