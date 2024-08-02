@@ -51,36 +51,41 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-uploadFile.addEventListener('change', () => {
+const onUploadFileChange = () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
 
   // Меняем изображение просмотра на загруженное изображение
   const file = uploadFile.files[0];
   const reader = new FileReader();
+  const onImgPathRead = () => {
+    img.src = reader.result;
+  };
   reader.addEventListener(
     'load',
-    () => {
-      // Конвертация изображения в base64-строку
-      img.src = reader.result;
-    },
+    onImgPathRead,
     false,
   );
 
   if (file) {
     reader.readAsDataURL(file);
   }
+};
 
-  // Добавляет слушатели на закрытие окна.
-  buttonClose.addEventListener('click', () => {
-    resetEffects();
-    closeUserModal();
-  });
+uploadFile.addEventListener('change', onUploadFileChange);
+// Добавляет слушатели на закрытие окна.
 
-  // Добавляет слушатели на кнопки маштабирования.
-  scaleBigger.addEventListener('click', onBiggerButtonClick);
-  scaleSmaller.addEventListener('click', onSmallerButtonClick);
-});
+const onButtonCloseClick = () => {
+  resetEffects();
+  closeUserModal();
+};
+
+buttonClose.addEventListener('click', onButtonCloseClick);
+
+// Добавляет слушатели на кнопки маштабирования.
+scaleBigger.addEventListener('click', onBiggerButtonClick);
+scaleSmaller.addEventListener('click', onSmallerButtonClick);
+
 
 function closeUserModal () {
   imgUploadOverlay.classList.add('hidden');

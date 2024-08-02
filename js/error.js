@@ -18,16 +18,14 @@ const renderErrorMessage = () => {
   const errorModal = document.querySelector('.error');
   const buttonClose = document.querySelector('.error__button');
 
-  document.addEventListener('keydown', () => {
+  const onErrorModalRemove = () => {
     errorModal.remove();
-  });
-  buttonClose.addEventListener('click', () => {
-    errorModal.remove();
-  });
+  };
 
-  errorModal.addEventListener('click', () => {
-    errorModal.remove();
-  });
+  document.addEventListener('keydown', onErrorModalRemove);
+  buttonClose.addEventListener('click', onErrorModalRemove);
+
+  errorModal.addEventListener('click', onErrorModalRemove);
 };
 
 const successTemplate = document.querySelector('#success')
@@ -47,16 +45,14 @@ const renderSuccessMessage = () => {
   const successModal = document.querySelector('.success');
   const buttonClose = document.querySelector('.success__button');
 
-  document.addEventListener('keydown', () => {
+  const onSuccessModalRemove = () => {
     successModal.remove();
-  });
-  buttonClose.addEventListener('click', () => {
-    successModal.remove();
-  });
+  };
 
-  successModal.addEventListener('click', () => {
-    successModal.remove();
-  });
+  document.addEventListener('keydown', onSuccessModalRemove);
+  buttonClose.addEventListener('click', onSuccessModalRemove);
+
+  successModal.addEventListener('click', onSuccessModalRemove);
 };
 
 

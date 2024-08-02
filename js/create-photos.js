@@ -21,13 +21,11 @@ const similarPhotos = posts.map(
     const commentary = [];
     post.comments.forEach((comment) => {
       const comm = createComments(comment);
-      // console.log(commentary);
       return commentary.push(comm);
     });
 
     const photo = createPhotos(post);
     photo.comments = commentary;
-    // console.log(photo);
     return photo;
   });
 const similarImages = Array.from(similarPhotos);
