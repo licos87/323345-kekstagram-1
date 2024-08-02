@@ -1,5 +1,4 @@
 // Общие функции
-
 /**
  * Функция создания рандомного числа в диапазоне чисел от minNumber до maxNumber
  * @param {number} minNumber
