@@ -1,6 +1,7 @@
 // Создание библиотеки данных о фотографиях
 
 import { similarImages } from './create-photos.js';
+
 const libraryThumbnail = [];
 
 /**

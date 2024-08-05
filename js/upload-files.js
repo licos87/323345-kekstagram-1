@@ -1,6 +1,11 @@
 import { isEscapeKey } from './utils.js';
 import { resetEffects } from './effects.js';
 
+const SCALE_BASE = 1;
+const SCALE_STEP = 0.25;
+const SCALE_MIN = 0.25;
+const SCALE_MAX = 1;
+
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -12,10 +17,6 @@ const scaleBigger = document.querySelector('.scale__control--bigger');
 const scaleSmaller = document.querySelector('.scale__control--smaller');
 const scaleValue = document.querySelector('.scale__control--value');
 
-const SCALE_BASE = 1;
-const SCALE_STEP = 0.25;
-const SCALE_MIN = 0.25;
-const SCALE_MAX = 1;
 let newScale = SCALE_BASE;
 
 
