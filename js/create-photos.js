@@ -1,6 +1,8 @@
 // Создание группы данных об изображениях
 import { getData } from './api.js';
 
+const posts = await getData();
+
 const createComments = (comment) => ({
   id: comment.id,
   avatar: `../${comment.avatar}`,
@@ -15,21 +17,21 @@ const createPhotos = (post) => ({
   likes: post.likes,
   // comments: commentary,
 });
-const posts = await getData();
+
+
 const similarPhotos = posts.map(
   (post) => {
     const commentary = [];
     post.comments.forEach((comment) => {
       const comm = createComments(comment);
-      // console.log(commentary);
       return commentary.push(comm);
     });
 
     const photo = createPhotos(post);
     photo.comments = commentary;
-    // console.log(photo);
     return photo;
   });
+
 const similarImages = Array.from(similarPhotos);
 
 export { similarImages };

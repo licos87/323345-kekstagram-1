@@ -1,6 +1,11 @@
 import { isEscapeKey } from './utils.js';
 import { resetEffects } from './effects.js';
 
+const SCALE_BASE = 1;
+const SCALE_STEP = 0.25;
+const SCALE_MIN = 0.25;
+const SCALE_MAX = 1;
+
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -12,10 +17,6 @@ const scaleBigger = document.querySelector('.scale__control--bigger');
 const scaleSmaller = document.querySelector('.scale__control--smaller');
 const scaleValue = document.querySelector('.scale__control--value');
 
-const SCALE_BASE = 1;
-const SCALE_STEP = 0.25;
-const SCALE_MIN = 0.25;
-const SCALE_MAX = 1;
 let newScale = SCALE_BASE;
 
 
@@ -51,36 +52,41 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-uploadFile.addEventListener('change', () => {
+const onUploadFileChange = () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
 
   // Меняем изображение просмотра на загруженное изображение
   const file = uploadFile.files[0];
   const reader = new FileReader();
+  const onImgPathRead = () => {
+    img.src = reader.result;
+  };
   reader.addEventListener(
     'load',
-    () => {
-      // Конвертация изображения в base64-строку
-      img.src = reader.result;
-    },
+    onImgPathRead,
     false,
   );
 
   if (file) {
     reader.readAsDataURL(file);
   }
+};
 
-  // Добавляет слушатели на закрытие окна.
-  buttonClose.addEventListener('click', () => {
-    resetEffects();
-    closeUserModal();
-  });
+uploadFile.addEventListener('change', onUploadFileChange);
+// Добавляет слушатели на закрытие окна.
 
-  // Добавляет слушатели на кнопки маштабирования.
-  scaleBigger.addEventListener('click', onBiggerButtonClick);
-  scaleSmaller.addEventListener('click', onSmallerButtonClick);
-});
+const onButtonCloseClick = () => {
+  resetEffects();
+  closeUserModal();
+};
+
+buttonClose.addEventListener('click', onButtonCloseClick);
+
+// Добавляет слушатели на кнопки маштабирования.
+scaleBigger.addEventListener('click', onBiggerButtonClick);
+scaleSmaller.addEventListener('click', onSmallerButtonClick);
+
 
 function closeUserModal () {
   imgUploadOverlay.classList.add('hidden');
