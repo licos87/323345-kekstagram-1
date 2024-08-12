@@ -19,7 +19,6 @@ const scaleValue = document.querySelector('.scale__control--value');
 
 let newScale = SCALE_BASE;
 
-
 // Изменение масштаба изображения
 const onBiggerButtonClick = () => {
   if ((newScale + SCALE_STEP) <= SCALE_MAX) {
