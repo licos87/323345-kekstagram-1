@@ -6,6 +6,8 @@ const pictureTemplate = document.querySelector('#picture')
 
 const picturesBlock = document.querySelector('.pictures');
 
+const filters = document.querySelector('.img-filters');
+
 /**
  * Создает шаблон на создание миниатюры. Данные берет из симуляции данных об изображениях (similarImg), на входе деструтуризирует их.
  * @param {id} similarImg.id
@@ -40,6 +42,8 @@ const renderThumbnail = (images) => {
   });
   // Добавялет в html разметку в виде document.fragment
   picturesBlock.append(thumbnailFragment);
+
+  filters.classList.remove('img-filters--inactive');
 };
 
 export { renderThumbnail };
