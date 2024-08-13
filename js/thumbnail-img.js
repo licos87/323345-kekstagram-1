@@ -34,6 +34,7 @@ const createImg = (({id, url, description, likes, comments}) => {
  * @param { function() } Получает на вход результат выполнения симуляции данных об изображениях.
  */
 const renderThumbnail = (images) => {
+  picturesBlock.querySelectorAll('.picture').forEach((element) => element.remove());
   const thumbnailFragment = document.createDocumentFragment();
 
   images.forEach((image) => {

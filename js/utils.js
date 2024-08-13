@@ -1,4 +1,7 @@
 // Общие функции
+
+const TIMEOUT_DELAY = 500;
+
 /**
  * Функция создания рандомного числа в диапазоне чисел от minNumber до maxNumber
  * @param {number} minNumber
@@ -60,4 +63,12 @@ const generatecommentsId = () => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey};
+const debounce = (callback) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), TIMEOUT_DELAY);
+  };
+};
+
+export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey, debounce};
