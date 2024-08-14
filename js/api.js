@@ -1,3 +1,5 @@
+import { showAlert } from './utils.js';
+
 const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -17,7 +19,7 @@ const ErrorText = {
 const load = async (route, errorText, method = Method.GET, body = null) => {
   const response = await fetch(`${BASE_URL}${route}`, {method, body})
     .catch(() => {
-      throw new Error(errorText);
+      showAlert(errorText);
     });
 
   return await response.json();
