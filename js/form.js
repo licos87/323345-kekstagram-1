@@ -80,7 +80,7 @@ const onFileInputChange = () => {
 
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
 
-const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
+const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT && tags.length > 0;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());

@@ -17,6 +17,7 @@ const renderErrorMessage = () => {
 
   const errorModal = document.querySelector('.error');
   const buttonClose = document.querySelector('.error__button');
+  const errorInner = errorModal.querySelector('.error__inner');
 
   const onErrorModalRemove = () => {
     errorModal.remove();
@@ -25,7 +26,11 @@ const renderErrorMessage = () => {
   document.addEventListener('keydown', onErrorModalRemove);
   buttonClose.addEventListener('click', onErrorModalRemove);
 
-  errorModal.addEventListener('click', onErrorModalRemove);
+  errorModal.addEventListener('click', (evt) => {
+    if (evt.target !== errorInner) {
+      onErrorModalRemove();
+    }
+  });
 };
 
 const successTemplate = document.querySelector('#success')
@@ -44,6 +49,7 @@ const renderSuccessMessage = () => {
 
   const successModal = document.querySelector('.success');
   const buttonClose = document.querySelector('.success__button');
+  const successInner = successModal.querySelector('.success__inner');
 
   const onSuccessModalRemove = () => {
     successModal.remove();
@@ -52,7 +58,11 @@ const renderSuccessMessage = () => {
   document.addEventListener('keydown', onSuccessModalRemove);
   buttonClose.addEventListener('click', onSuccessModalRemove);
 
-  successModal.addEventListener('click', onSuccessModalRemove);
+  successModal.addEventListener('click', (evt) => {
+    if (evt.target !== successInner) {
+      onSuccessModalRemove();
+    }
+  });
 };
 
 
