@@ -42,6 +42,6 @@ const renderLibrary = (images) => {
   return libraryThumbnail;
 };
 
-const imageDatabase = renderLibrary(similarImages);
+const images = renderLibrary(similarImages);
 
-export { imageDatabase };
+export { images };

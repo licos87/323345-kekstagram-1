@@ -62,8 +62,8 @@ const effectLevelElement = document.querySelector('.effect-level__value');
 
 const isDefault = () => chosenEffect === BASE_EFFECT;
 
-const toSliderShow = () => sliderContainerElement.classList.remove('hidden');
-const toSliderHide = () => sliderContainerElement.classList.add('hidden');
+const showSlider = () => sliderContainerElement.classList.remove('hidden');
+const hideSlider = () => sliderContainerElement.classList.add('hidden');
 
 const updateSlider = () => {
   sliderElement.noUiSlider.updateOptions({
@@ -75,9 +75,9 @@ const updateSlider = () => {
     start: chosenEffect.max,
   });
   if (isDefault()) {
-    toSliderHide();
+    hideSlider();
   } else {
-    toSliderShow();
+    showSlider();
   }
 };
 
@@ -112,7 +112,7 @@ noUiSlider.create(sliderElement, {
   step:BASE_EFFECT.step,
   connect: 'lower',
 });
-toSliderHide();
+hideSlider();
 
 effectsElement.addEventListener('change', onEffectsChange);
 sliderElement.noUiSlider.on('update', onSliderUpdate);

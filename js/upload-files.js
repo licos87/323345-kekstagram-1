@@ -91,7 +91,6 @@ function closeUserModal () {
   imgUploadOverlay.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  buttonClose.removeEventListener('click', closeUserModal);
 }
 
 export { resetScale };

@@ -15,20 +15,19 @@ const createPhotos = (post) => ({
   url: `../${ post.url }`,
   description: post.description,
   likes: post.likes,
-  // comments: commentary,
 });
 
 
 const similarPhotos = posts.map(
   (post) => {
-    const commentary = [];
+    const commentList = [];
     post.comments.forEach((comment) => {
-      const comm = createComments(comment);
-      return commentary.push(comm);
+      const newComment = createComments(comment);
+      return commentList.push(newComment);
     });
 
     const photo = createPhotos(post);
-    photo.comments = commentary;
+    photo.comments = commentList;
     return photo;
   });
 

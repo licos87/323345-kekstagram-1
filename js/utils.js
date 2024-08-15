@@ -52,16 +52,6 @@ const getRandomArrayElement = (elements) => {
   return elements[newElement()];
 };
 
-
-/**
- * Счетчик id коментариев
- * @returns {number} число каждый раз +1
- */
-const generatecommentsId = () => {
-  let lastIdcomments = 1;
-  return () => lastIdcomments++;
-};
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const debounce = (callback) => {
@@ -91,4 +81,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, generatecommentsId, isEscapeKey, debounce, showAlert};
+export {getRandomNumber, createNoReapeatRandomIndex, getRandomArrayElement, isEscapeKey, debounce, showAlert};
