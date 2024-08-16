@@ -108,9 +108,9 @@ function onModalOpen (evt) {
       socialCommentCount.textContent = commentShowSum;
       commentsCount.textContent = dataBaseCommentsLength;
 
-      // commentsPartOne.forEach((element) => {
-      //   element.style.display = 'none';
-      // });
+      commentsPartOne.forEach((element) => {
+        element.style.display = 'none';
+      });
       toggleComments();
     });
   }
