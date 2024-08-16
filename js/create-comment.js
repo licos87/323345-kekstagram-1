@@ -1,5 +1,5 @@
 // Создание комменитариев
-import { imageDatabase } from './imageDatabase.js';
+import { images } from './images.js';
 import { isEscapeKey } from './utils.js';
 
 const STEP = 5;
@@ -15,7 +15,7 @@ const moreCommentsBtn = document.querySelector('.comments-loader');
 const socialCommentCount = document.querySelector('.comments-step');
 const commentsCount = document.querySelector('.comments-count');
 
-const onCommentsBlockRemoveChildrens = () => {
+const removeComments = () => {
   while (commentsBlock.firstChild) {
     commentsBlock.removeChild(commentsBlock.firstChild);
   }
@@ -25,7 +25,7 @@ const onCommentsBlockRemoveChildrens = () => {
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    onCommentsBlockRemoveChildrens();
+    removeComments();
   }
 };
 
@@ -42,7 +42,7 @@ const renderComments = (libraryCommentElements) => {
   const commentFragment = document.createDocumentFragment();
 
   libraryCommentElements.forEach((libraryCommentElement) => {
-    const createComentItem = ((data) => {
+    const createCommentItem = ((data) => {
       const commentElement = commentItem.cloneNode(true);
 
       commentElement.querySelector('.social__picture').src = data.avatar;
@@ -52,8 +52,8 @@ const renderComments = (libraryCommentElements) => {
       return commentElement;
     });
 
-    const commentary = createComentItem(libraryCommentElement);
-    commentFragment.append(commentary);
+    const comment = createCommentItem(libraryCommentElement);
+    commentFragment.append(comment);
   });
   commentsBlock.append(commentFragment);
 };
@@ -63,9 +63,9 @@ function onModalOpen (evt) {
 
     // Ищем соответствие в библиотеке данных о фотографиях
     const targetId = evt.target.dataset.id;
-    const targetIndex = imageDatabase.findIndex((element) => String(element.id) === targetId);
+    const targetIndex = images.findIndex((element) => String(element.id) === targetId);
 
-    renderComments(imageDatabase[targetIndex].comments);
+    renderComments(images[targetIndex].comments);
 
     const newCommentList = Array.from(commentsBlock.querySelectorAll('li'));
 
@@ -73,7 +73,7 @@ function onModalOpen (evt) {
     let commentsPartOne = newCommentList.slice(item, item + STEP);
     let commentShowSum = commentsPartOne.length;
 
-    const dataBaseCommentsLength = imageDatabase[targetIndex].comments.length;
+    const dataBaseCommentsLength = images[targetIndex].comments.length;
 
     moreCommentsBtn.classList.remove('visually-hidden');
     if (commentShowSum >= dataBaseCommentsLength) {
@@ -83,7 +83,7 @@ function onModalOpen (evt) {
     socialCommentCount.textContent = commentShowSum;
     commentsCount.textContent = dataBaseCommentsLength;
 
-    const toggleCommnts = () => {
+    const toggleComments = () => {
       newCommentList.forEach((element) => {
         element.style.display = 'none';
       });
@@ -92,13 +92,13 @@ function onModalOpen (evt) {
       });
     };
 
-    toggleCommnts();
+    toggleComments();
 
     moreCommentsBtn.addEventListener('click', () => {
 
       item += STEP;
-      commentsPartOne = newCommentList.slice(item, item + STEP);
-      commentShowSum += commentsPartOne.length;
+      commentsPartOne = newCommentList.slice(0, item + STEP);
+      commentShowSum += newCommentList.slice(item, item + STEP).length;
 
       moreCommentsBtn.classList.remove('visually-hidden');
       if (commentShowSum >= dataBaseCommentsLength) {
@@ -108,10 +108,10 @@ function onModalOpen (evt) {
       socialCommentCount.textContent = commentShowSum;
       commentsCount.textContent = dataBaseCommentsLength;
 
-      commentsPartOne.forEach((element) => {
-        element.style.display = 'none';
-      });
-      toggleCommnts();
+      // commentsPartOne.forEach((element) => {
+      //   element.style.display = 'none';
+      // });
+      toggleComments();
     });
   }
   document.addEventListener('keydown', onDocumentKeydown);
@@ -119,7 +119,8 @@ function onModalOpen (evt) {
 
 function onModalClose () {
 
-  onCommentsBlockRemoveChildrens();
+  removeComments();
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
 
 picturesBlock.addEventListener('click', onModalOpen);

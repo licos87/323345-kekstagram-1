@@ -21,6 +21,7 @@ const renderErrorMessage = () => {
 
   const onErrorModalRemove = () => {
     errorModal.remove();
+    document.removeEventListener('keydown', onErrorModalRemove);
   };
 
   document.addEventListener('keydown', onErrorModalRemove);
@@ -53,6 +54,7 @@ const renderSuccessMessage = () => {
 
   const onSuccessModalRemove = () => {
     successModal.remove();
+    document.removeEventListener('keydown', onSuccessModalRemove);
   };
 
   document.addEventListener('keydown', onSuccessModalRemove);

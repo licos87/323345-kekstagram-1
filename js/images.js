@@ -33,15 +33,15 @@ const dataImg = (({id, url, description, likes, comments}) => {
  * @param { similarImages } Получает на входе симулированные изображения
  * @returns  { [] } Возвращает массив данных на основе similarImg
  */
-const renderLibrary = (images) => {
+const renderLibrary = (pictures) => {
   // Обрабатывает каждое изображение и добавляет результат в массив библотеки.
-  images.forEach((image) => {
-    libraryThumbnail.push(dataImg(image));
+  pictures.forEach((picture) => {
+    libraryThumbnail.push(dataImg(picture));
   });
 
   return libraryThumbnail;
 };
 
-const imageDatabase = renderLibrary(similarImages);
+const images = renderLibrary(similarImages);
 
-export { imageDatabase };
+export { images };

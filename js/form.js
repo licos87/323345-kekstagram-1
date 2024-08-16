@@ -33,7 +33,7 @@ const pristine = new Pristine(form, {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 
@@ -47,7 +47,7 @@ const hideModal = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 
@@ -63,7 +63,7 @@ const isTextFieldFocused = () =>
  * Поведение при нажатии Escape.
  * @param {*} evt
  */
-function onDocKeydown(evt) {
+function onDocumentKeydown(evt) {
   if (!isTextFieldFocused() && evt.key === 'Escape' && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
@@ -80,7 +80,7 @@ const onFileInputChange = () => {
 
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
 
-const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT && tags.length > 0;
+const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
 
 const hasUniqueTags = (tags) => {
   const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
@@ -125,14 +125,14 @@ const setUserFormSubmit = (onSuccess) => {
         })
         .catch(
           () => {
-            document.removeEventListener('keydown', onDocKeydown);
+            document.removeEventListener('keydown', onDocumentKeydown);
             renderErrorMessage();
           }
         )
         .finally(() => {
           unblockSubmitButton();
           setTimeout(() => {
-            document.addEventListener('keydown', onDocKeydown);
+            document.addEventListener('keydown', onDocumentKeydown);
           }, 2000);
         });
     }
